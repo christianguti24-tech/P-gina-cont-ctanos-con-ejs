@@ -1,0 +1,33 @@
+<%- include("templates/header", {titulo:"Mostrar Contactos"}) %>
+
+<h2 class="mt-4 mb-3">Lista de contactos</h2>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Edad</th>
+      <th>Modificar/Borrar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if (contactosMongo && contactosMongo.length > 0) { %>
+      <% contactosMongo.forEach(contacto => { %>
+        <tr>
+          <td><%= contacto.nombre %></td>
+          <td><%= contacto.edad %></td>
+          <td>
+            <a href="/editarContacto/<%= contacto._id %>">Editar</a> |
+            <a href="/borrarContacto/<%= contacto._id %>">Borrar</a>
+          </td>
+        </tr>
+      <% }) %>
+    <% } else { %>
+      <tr>
+        <td colspan="3" class="text-center text-muted">No hay contactos registrados.</td>
+      </tr>
+    <% } %>
+  </tbody>
+</table>
+
+<%- include("templates/footer") %>
